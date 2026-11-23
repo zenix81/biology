@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>중학교 생명과학 용어 탐험</title>
+<style>
+:root{--bg:#f2f8f3;--cd:#fff;--tx:#1b2633;--mu:#5a6a7b;--pr:#2f8a4b;--ok:#18975a;--no:#d4433b;--ln:#d3dfd6;--sf:#e6f4e9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1712;--cd:#17221b;--tx:#e8f0ea;--mu:#9bb0a0;--pr:#5fcf80;--ok:#44c98b;--no:#ff7d74;--ln:#2b3d31;--sf:#1d3325}}
+:root[data-theme="dark"]{--bg:#0f1712;--cd:#17221b;--tx:#e8f0ea;--mu:#9bb0a0;--pr:#5fcf80;--ok:#44c98b;--no:#ff7d74;--ln:#2b3d31;--sf:#1d3325}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 "Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--cd);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--cd);border-bottom:1px solid var(--ln)}
+.hd{max-width:760px;margin:auto;padding:10px 16px;display:flex;justify-content:space-between;font-weight:700}
+#bar{height:4px;background:var(--pr);width:0;transition:width .4s}
+main{max-width:760px;margin:auto;padding:16px}
+section{background:var(--cd);border:1px solid var(--ln);border-radius:16px;padding:20px}
+h1,h2{margin:.3em 0}h1{font-size:1.5rem}h2{font-size:1.25rem}
+.tag{color:var(--pr);font-weight:700;font-size:.9rem}
+.box{background:var(--sf);border-radius:12px;padding:12px 14px;margin:12px 0}
+.q{border:1px solid var(--ln);border-radius:12px;padding:12px 14px;margin:12px 0}
+.q.ok{border-color:var(--ok)}
+.q p{margin:0 0 8px}
+.n{display:inline-block;min-width:1.8em;text-align:center;border-radius:50%;background:var(--sf);font-weight:700;margin-right:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input{font:inherit;padding:8px 10px;border:2px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx);min-width:0;width:200px}
+input:focus{outline:none;border-color:var(--pr)}
+.b{font:inherit;font-weight:700;padding:8px 14px;border:0;border-radius:10px;background:var(--pr);color:#fff;cursor:pointer}
+:root:not([data-theme="light"]) .b{color:#08200f}
+.b.g{background:var(--cd);color:var(--tx);border:1px solid var(--ln)}
+.b:disabled{opacity:.5;cursor:default}
+.nx{display:block;width:100%;margin-top:16px;padding:12px}
+.fb{margin-top:8px;font-weight:600;min-height:1em}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.hi{color:var(--mu)}
+details{margin-top:10px}summary{cursor:pointer;font-weight:700}
+dl{margin:8px 0}dt{font-weight:700;margin-top:6px}dd{margin:0 0 0 10px;color:var(--mu);font-size:.92rem}
+.cert{text-align:center;border:3px double var(--pr);border-radius:14px;padding:18px;margin:14px 0}
+</style></head>
+<body>
+<header><div class="hd"><span>🧬 생명과학 용어 탐험</span><span>⭐ <span id="sc">0</span></span></div><div id="bar"></div></header>
+<main id="app">
+<section id="s0">
+<div class="tag">2015 개정 교육과정 · 중학교 과학 생명 영역</div>
+<h1>생명과학 용어, 내 힘으로 찾아보기</h1>
+<p>뜻풀이를 읽고 알맞은 <b>용어</b>를 직접 입력해요. 5개 단원, 50개 용어를 모두 찾으면 <b>생명과학 탐험가</b> 증서를 받아요!</p>
+<div class="box">🔬 <b>단원</b> · 생물의 다양성 → 식물과 에너지 → 동물과 에너지 → 자극과 반응 → 생식과 유전<br>⭐ <b>점수</b> · 첫 시도 정답 +3 · 오답 −1 · 힌트(초성) −1<br>✍️ <b>입력 팁</b> · 띄어쓰기는 상관없어요. 틀려도 맞을 때까지 다시 입력할 수 있어요.</div>
+<p>이름/별명 <input id="nm" maxlength="12" autocomplete="off"></p>
+<button class="b nx" id="go0">탐험 시작! 🚀</button>
+</section>
+<section id="s6" hidden>
+<div class="tag">임무 완수!</div>
+<h1>🎉 모든 용어를 찾았어요</h1>
+<div class="cert"><div>🧬 생명과학 탐험가 증서</div><h2 id="cn"></h2><div id="cr" style="font-size:1.3rem;font-weight:700"></div><div id="cs" style="color:var(--mu)"></div></div>
+<div class="box" id="rv"></div>
+<details><summary>📖 전체 용어 정리 보기</summary><div id="all"></div></details>
+<button class="b nx" onclick="location.reload()">처음부터 다시 복습하기</button>
+</section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const norm=s=>s.replace(/\s/g,'').toLowerCase();
+const CH='ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+const cho=s=>[...s.replace(/\s/g,'')].map(c=>{const k=c.charCodeAt(0)-44032;return k>=0&&k<11172?CH[Math.floor(k/588)]:c}).join('');
+let sc=0,name='탐험가',N=0;
+const add=n=>{sc=Math.max(0,sc+n);$('#sc').textContent=sc};
+const fb=(e,c,h)=>{e.className='fb '+c;e.innerHTML=h};
+function quiz(q,done){
+ const A=q.a.split('|'),w=A[0].replace(/\s/g,'');
+ const d=el('div','q',`<p><span class="n">${q.i}</span>${q.t}</p><div class="row"><input autocomplete="off" spellcheck="false"><button class="b">확인</button><button class="b g">💡 힌트 −1</button></div><div class="fb"></div>`);
+ const [inp,ok,hb]=$$('input,button',d),f=$('.fb',d);
+ const chk=()=>{const v=norm(inp.value);if(!v||d.ok)return;
+  if(A.some(x=>norm(x)===v)){d.ok=1;inp.disabled=ok.disabled=hb.disabled=1;d.classList.add('ok');fb(f,'ok','✅ 정답! '+A[0]);if(!q.bad)add(3);done()}
+  else{q.bad=1;add(-1);fb(f,'no','앗, 다시 생각해봐요 (−1)')}};
+ ok.onclick=chk;inp.onkeydown=e=>{if(e.key==='Enter')chk()};
+ hb.onclick=()=>{if(d.ok)return;if(!q.hint){q.hint=q.bad=1;add(-1)}fb(f,'hi','💡 초성: '+cho(A[0])+' ('+w.length+'글자)')};
+ return d}
+const U=[
+{t:'1단계 · 생물의 다양성 (중1)',h:'생물다양성과 분류',i:'지구에는 수많은 생물이 살아요. 생물다양성과 생물을 분류하는 방법에 관한 용어를 찾아봐요.',q:[
+['어떤 지역에 살고 있는 생물의 다양한 정도를 뜻하는 말은?','생물다양성|생물 다양성'],
+['자연 상태에서 짝짓기를 하여 번식 능력이 있는 자손을 낳을 수 있는 무리는?','종'],
+['같은 종의 개체 사이에서 나타나는 형질의 차이는?','변이'],
+['한 종 안에서 변이가 다양할수록 환경이 변했을 때 살아남는 개체가 있을 가능성이 커져요. 이처럼 같은 종 안의 다양성은?','유전적 다양성|유전적다양성'],
+['한 지역에 사는 생물종이 많고 각 종의 분포 비율이 고를수록 높아지는 다양성은?','종 다양성|종다양성'],
+['삼림, 사막, 습지, 갯벌처럼 서로 다른 서식 환경이 다양한 정도는?','생태계 다양성|생태계다양성'],
+['생물을 공통된 특징을 기준으로 무리 짓는 일은?','분류'],
+['생물을 분류할 때 가장 큰 단계는?','계'],
+['버섯, 곰팡이처럼 다른 생물이나 죽은 생물을 분해하여 양분을 얻는 생물이 속한 계는?','균계'],
+['세포에 핵막으로 둘러싸인 핵이 없는 단세포 생물(예: 대장균)이 속한 계는?','원핵생물계|원핵생물 계']]},
+{t:'2단계 · 식물과 에너지 (중2)',h:'광합성, 증산 작용, 호흡',i:'식물은 어떻게 양분을 만들고 물을 내보낼까요? 잎과 줄기, 뿌리에서 일어나는 일에 관한 용어를 찾아봐요.',q:[
+['식물이 빛에너지를 이용해 양분(포도당)을 스스로 만드는 작용은?','광합성'],
+['광합성이 일어나는 식물 세포의 세포 소기관은?','엽록체'],
+['잎의 표피에서 공기와 수증기가 드나드는 작은 구멍은?','기공'],
+['기공을 둘러싸고 있으며 기공을 열고 닫는 세포는?','공변세포|공변 세포'],
+['식물체 속의 물이 잎의 기공을 통해 수증기가 되어 빠져나가는 현상은?','증산 작용|증산작용|증산'],
+['광합성으로 만든 포도당이 변해 저장되는 물질로, 아이오딘 반응에서 청람색을 나타내는 것은?','녹말'],
+['살아 있는 모든 세포에서 산소를 이용해 양분을 분해하고 에너지를 얻는 작용은?','호흡'],
+['광합성의 원료로, 공기 중에서 기공을 통해 들어오는 기체는?','이산화 탄소|이산화탄소'],
+['뿌리에서 흡수한 물이 이동하는 통로가 되는 관은?','물관'],
+['잎에서 만든 양분이 이동하는 통로가 되는 관은?','체관']]},
+{t:'3단계 · 동물과 에너지 (중2)',h:'소화, 순환, 호흡, 배설',i:'동물은 음식물에서 에너지를 얻고 노폐물을 내보내요. 소화·순환·호흡·배설 기관과 관련된 용어를 찾아봐요.',q:[
+['음식물 속의 영양소를 크기가 작은 물질로 분해하는 과정은?','소화'],
+['소화 과정에서 영양소를 분해하는 물질은?','소화 효소|소화효소|효소'],
+['침 속에 들어 있으며 녹말을 엿당으로 분해하는 소화 효소는?','아밀레이스|아밀라아제'],
+['위에서 분비되며 단백질을 분해하는 소화 효소는?','펩신'],
+['심장에서 나가는 혈액이 흐르는 혈관으로, 벽이 두껍고 탄력이 강한 것은?','동맥'],
+['혈액의 성분 중 산소를 운반하는 혈구는?','적혈구'],
+['혈액이 응고되도록 도와주는 혈구는?','혈소판'],
+['혈액의 액체 성분으로, 영양소와 노폐물을 운반하는 것은?','혈장'],
+['폐를 이루는 작은 공기주머니로, 기체 교환이 일어나는 곳은?','폐포'],
+['몸속에서 생긴 노폐물을 걸러 오줌을 만드는 기관은?','콩팥|신장']]},
+{t:'4단계 · 자극과 반응 (중3)',h:'감각 기관, 신경계, 호르몬',i:'우리 몸은 자극을 받아들이고 판단해서 반응해요. 눈과 신경계, 호르몬에 관한 용어를 찾아봐요.',q:[
+['생물에게 반응을 일으키는 환경의 변화는?','자극'],
+['눈, 귀, 코, 혀, 피부처럼 자극을 받아들이는 기관은?','감각 기관|감각기관'],
+['눈으로 들어오는 빛의 양을 조절하기 위해 동공의 크기를 바꾸는 부분은?','홍채'],
+['눈의 렌즈 역할을 하며, 두께가 변해 물체의 상을 망막에 맺게 하는 부분은?','수정체'],
+['눈에서 상이 맺히고 시각 세포가 분포하는 부분은?','망막'],
+['자극을 전달하는 신경 세포를 무엇이라고 할까요?','뉴런'],
+['뇌와 척수로 이루어져 판단과 명령을 내리는 신경계는?','중추 신경계|중추신경계'],
+['자극을 받아들이는 기관에서 중추로 자극을 전달하는 뉴런은?','감각 뉴런|감각뉴런|감각 신경'],
+['의식과 관계없이 척수 등이 판단하여 빠르게 일어나는 반응(예: 무릎을 치면 다리가 올라감)은?','무조건 반사|무조건반사'],
+['분비샘에서 만들어져 혈액을 따라 이동하며 몸의 기능을 조절하는 화학 물질은?','호르몬']]},
+{t:'5단계 · 생식과 유전 (중3)',h:'세포 분열, 수정과 발생, 유전',i:'생물은 어떻게 자라고 자손을 만들까요? 세포 분열과 유전에 관한 용어를 찾아봐요.',q:[
+['생물의 몸을 이루는 세포가 둘로 나뉘는 과정은?','세포 분열|세포분열'],
+['세포 분열 때 유전 물질이 뭉쳐져 막대 모양으로 나타나는 구조는?','염색체'],
+['DNA에서 한 가지 유전 형질을 결정하는 부분은?','유전자'],
+['세포 분열에서 핵이 나뉜 뒤 세포질이 나뉘는 과정은?','세포질 분열|세포질분열'],
+['생식 세포를 만들 때 일어나며 염색체 수가 절반으로 줄어드는 세포 분열은?','감수 분열|감수분열|생식 세포 분열'],
+['난자와 정자 같은 생식 세포가 결합하는 현상은?','수정'],
+['수정란이 세포 분열을 거듭하며 하나의 개체가 되는 과정은?','발생'],
+['크기와 모양이 같고 부모로부터 하나씩 물려받아 쌍을 이루는 염색체는?','상동 염색체|상동염색체'],
+['하나의 형질에 대해 서로 뚜렷하게 구별되는 형질은?','대립 형질|대립형질'],
+['잡종 1대에서 겉으로 나타나는 형질은?','우성|우성 형질|우성형질']]}];
+let k=0;U.forEach(u=>u.q=u.q.map(([t,a])=>({t,a,i:++k})));N=k;
+const app=$('#app'),secs=[$('#s0')];
+function go(i){secs.forEach((e,j)=>e.hidden=j!=i);$('#bar').style.width=i/6*100+'%';scrollTo(0,0);if(i==6)fin()}
+U.forEach((u,x)=>{const sec=el('section','',`<div class="tag">${u.t}</div><h2>${u.h}</h2><div class="box">${u.i}</div>`);sec.hidden=1;
+ let left=u.q.length;const nb=el('button','b nx','🔒 모든 용어를 찾으면 열려요');nb.disabled=1;
+ const done=()=>{if(--left==0){nb.disabled=0;nb.textContent=x<4?'다음 단원으로 →':'임무 완수하기 🎉'}};
+ u.q.forEach(q=>sec.append(quiz(q,done)));nb.onclick=()=>go(x+2);sec.append(nb);app.insertBefore(sec,$('#s6'));secs.push(sec)});
+secs.push($('#s6'));
+$('#go0').onclick=()=>{name=$('#nm').value.trim()||'탐험가';go(1)};
+function fin(){const p=sc/(3*N);$('#cn').textContent=name+' 탐험가';
+ $('#cr').textContent=p>=.9?'🏆 생명과학 마스터':p>=.7?'🧬 생명과학 탐험가':p>=.4?'🔬 견습 연구원':'🌱 새싹 연구원';
+ $('#cs').textContent='획득 점수 ⭐ '+sc+' / '+3*N;
+ const bad=U.flatMap(u=>u.q).filter(q=>q.bad);
+ $('#rv').innerHTML=bad.length?`<b>다시 확인할 용어 (${bad.length}개)</b><dl>${bad.map(q=>`<dt>${q.a.split('|')[0]}</dt><dd>${q.t}</dd>`).join('')}</dl>`:'<b>👏 틀리거나 힌트를 쓴 용어가 하나도 없어요!</b>';
+ $('#all').innerHTML=U.map(u=>`<h3 style="margin:10px 0 0">${u.t}</h3><dl>${u.q.map(q=>`<dt>${q.a.split('|')[0]}</dt><dd>${q.t}</dd>`).join('')}</dl>`).join('')}
+</script></body></html>
